@@ -15,8 +15,8 @@ const Patternbg = ({ children }) => {
         <div style={{ position: 'absolute', left: '-100px', top: '20%', zIndex: 0, filter: 'blur(8px)'}}>
           <img width='400px' src={satelite} alt="Random content 1" className="animateImage" data-speed=".1"/>
         </div>
-        <div style={{ position: 'absolute', left: '-20px', top: '20%', zIndex: 1 }}>
-        <img width='200px' src={satelite} alt="Random content 1" className="animateImage" data-speed=".4"/>
+        <div style={{ position: 'absolute', left: '-75px', top: '20%', zIndex: 1 }}>
+        <img width='180px' src={satelite} alt="Random content 1" className="animateImage" data-speed=".4"/>
       </div>
       <div style={{ position: 'absolute', left: '-20px', bottom: '40%', zIndex: 1 }}>
         <img  width='144px' src={planet2} alt="Random content 2" className="animateImage" data-speed=".2"/>
