@@ -1,8 +1,8 @@
-# ENGINEER-NITK
+# PRAXIS-24
 
 <p align="center">
-  <a href="https://engineer-nitk.github.io/">
-    <img width="300" src="https://github.com/ENGINEER-NITK/ENGINEER-NITK.github.io/blob/main/images/NEWLOGO.png" alt="Engineer NITK Logo"/>
+  <a href="https://pccoeieee.org">
+    <img width="300" src="#" alt="Praxis24 Logo"/>
   </a>
 </p>
 
