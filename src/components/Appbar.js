@@ -24,7 +24,7 @@ import { FiMenu, FiX } from 'react-icons/fi';
 import { Link } from "react-router-dom";
 import GradientText from './common/gradienttext';
 import Spacer from './Spacer';
-import Logo from '../assets/logo_main.png'
+import Logo from '../assets/logo-main.png'
 import gsap from 'gsap';
 import Flip from 'gsap/Flip'
 import Patternbg from './common/patternbg';
