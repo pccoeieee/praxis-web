@@ -24,7 +24,7 @@ import Patternbg from '../common/patternbg';
 
 const servicesData = [
   {
-    title: "Blue Bit",
+    title: "The Blue Bit",
     description:
       "A dynamic 36-hour hackathon! Engage in two exhilarating rounds – a 36-hour online challenge and an intense 8-hour offline round.",
     imageUrl: Home, // Replace with the actual image URL or import the image,
@@ -45,7 +45,7 @@ const servicesData = [
     longDescription: "A Healthcare-focused Ideathon, features tracks such as Telemedicine, Healthcare Data Analytics, HealthTech for Mental Health, Patient Records Management, Wearable Technology, and Healthcare Cybersecurity. Participants explore innovative solutions in these domains, aiming to revolutionise healthcare through technology-driven approaches."
   },
   {
-    title: "Virtual Treasure Hunt",
+    title: "Virtual Treasure Hunt 2.0",
     description:
     "An online interactive game where participants solve clues and follow a series of challenges or puzzles to discover a hidden treasure.",
     imageUrl: Time, // Replace with the actual image URL or import the image

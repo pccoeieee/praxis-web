@@ -4,16 +4,10 @@ import { Box } from "@mui/material";
 import { useLeaderboardData } from "../../hooks/useQuery";
 
 const columns = [
-  { field: "id", headerName: "S.no", width: 70 }, // fixed size for serial number
-  { field: "promoCode", headerName: "Promo Code", flex: 1 },
+  { field: "id", headerName: "Sr.no", width: 70 }, // fixed size for serial number
+  { field: "promoCode", headerName: "Referral Code", flex: 1 },
   { field: "name", headerName: "Name", flex: 1 },
   { field: "collegeName", headerName: "College Name", flex: 1 },
-  {
-    field: "score",
-    headerName: "Score",
-    width: 100, // fixed width for score for better visual appeal
-    sortComparator: (v1, v2, row1, row2) => row2.score - row1.score,
-  },
 ];
 const Leaderboard = ({ data }) => {
   return (

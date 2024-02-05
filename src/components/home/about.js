@@ -1,169 +1,149 @@
-import { Container, Grid, Skeleton, Stack, Typography } from '@mui/material';
-import GradientText from '../common/gradienttext';
-import Spacer from '../Spacer';
-import GradientBox from '../common/gradientbox';
-import Iphone12 from '../../assets/png/iPhone 12 _ 12 Pro.png';
-import BoxContent from '../common/boxcontent';
-import Samsung from '../../assets/png/Samsung Galaxy Note20 Ultra 5G.png';
-import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
-import Box from '@mui/material/Box';
-import Home from '../../assets/svg/Dayflow Party Time.svg';
-import { Description, Heading } from '../common/typography';
-import useGsap, { animateOnScroll } from '../../hooks/useGsap';
-import gsap from 'gsap';
-import EmblaCarousel from '../common/carousel';
-import dots from '../../assets/png/dots-2.png'
-import Patternbg from '../common/patternbg';
-import { useTimeline } from '../../hooks/useTimeline';
+import React, { useRef,useState,useEffect } from 'react';
+import { Box, Button, Chip, Container, IconButton, Skeleton, Stack, Typography, Grid } from '@mui/material';
+import Appbar from '../../components/Appbar';
+import Footer from '../../components/common/footer';
+import Spacer from '../../components/Spacer';
+import { Description, Heading } from '../../components/common/typography';
+import EmblaCarousel from '../../components/common/carousel';
+import GradientBox from '../../components/common/gradientbox';
+import { FiArrowRight, FiArrowLeft, FiCalendar, FiClock, FiMapPin, FiUser } from 'react-icons/fi';
+import GradientText from '../../components/common/gradienttext';
+import { useEventData } from '../../hooks/useEvents';
+import CustomizedDialogs from './CustomizedDialogs';
+import { AiFillTrophy } from 'react-icons/ai';
+import easyMeshGradient from "easy-mesh-gradient";
+import Patternbg from '../../components/common/patternbg';
+import { CgScrollV } from 'react-icons/cg';
+import {  GiTicket } from 'react-icons/gi';
 
-const UserBoxContainer = styled(Box)`
-  display: flex;
-  align-items: center;
-`;
 
-const UserImage = styled.img`
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin-right: 20px;
-`;
+const HeadCarousel = () => {
+  const { data, isLoading } = useEventData();
+  return (
+    isLoading ? <Skeleton height='450px' />  :  <EmblaCarousel flex="0 0 100%" gap="20px">
 
-const UserInfo = styled(Box)`
-  display: flex;
-  flex-direction: column;
-`;
+      {data.map((event, index) => (
+        <HeadEvent event={event} key={index} />
+      ))}
 
-const UserName = styled(Typography)`
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 8px;
-`;
+    </EmblaCarousel>
+  );
+};
 
-const UserDescription = styled(Typography)`
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 16px;
-`;
+const HeadEvent = ({ subtitle, firstCta, secondCta, description, event}) => {
+  const background = event.image;
+  const title = event.title;
+  const needRegister = event.needRegister;
+  const rule = event.rule;
+  const poc = event.POC;
+  const poc_contact = event.POC_Contact;
+  const date = event.Date;
+  const venue = event.Venue
+  const isCompetition = event.isCompetition
+  const prize = event.Prize
+  const registrationLink = event.registrationLink
 
-const SocialMediaLink = styled(Typography)`
-  display: inline-block;
-  margin-right: 12px;
-  font-size: 20px;
-  color: #333;
-  text-decoration: none;
+  const [CurrentCardIndex, setCurrentCardIndex] = useState(0);
+  const { data, isLoading } = useEventData();
 
-  &:hover {
-    color: #007bff;
-  }
-`;
+  const handleNextCard = () => {
+    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % data.length);
+  };
+
+  const handlePrevCard = () => {
+    setCurrentCardIndex((prevIndex) => (prevIndex - 1 + data.length) % data.length);
+  };
+
+  return (
+    <GradientBox size='small' height="100%" color="white">
+      <img
+        style={{
+          display: 'block',
+          position: 'absolute',
+          height: '100%',
+          right: 0,
+          bottom: 0,
+          zIndex: -1,
+          opacity: 0.4,
+        }}
+        src={background}
+      />
+      <Container maxWidth="lg">
+        {/* <Typography fontFamily="Lato" variant="body1" gutterBottom>
+          {title}
+      </Typography> */}
+      <Stack direction="row" alignItems="center" justifyContent="space-between" mt={2}>
+          <IconButton onClick={handlePrevCard}>
+            <FiArrowLeft />
+          </IconButton>
+          <IconButton onClick={handleNextCard}>
+            <FiArrowRight />
+          </IconButton>
+        </Stack>
+
+        <Box sx={{ width: { xs: '100%', md: '45%' } }}>
+          <Typography
+            variant="h1"
+            pt={8}
+            sx={{
+              fontSize: {
+                xs: '48px',
+                md: '72px',
+              },
+            }}
+          >
+            {title}
+          </Typography>
+          {/* <Typography fontWeight={700} variant="body1">
+            Small Title{" "}
+          </Typography> */}
+          <Spacer size='xs'/>
+          {/*{needRegister ? <Spacer size='xs'/> : <Typography variant='body1' pb={2}>*/}
+          {/*  {des}*/}
+          {/*</Typography>}*/}
+        </Box>
+        <Stack direction="row" flexWrap='wrap' alignItems="center" gap={1} mb={1}>
+          {needRegister && <a target='_blank' href={registrationLink}><Chip color='primary' label="Registration" sx={{ width: '150px', height: '40px' }} icon={<GiTicket />} /></a>}
+          {needRegister && <a target='_blank' href={rule}><Chip color='secondary' label="Rule Book" sx={{ width: '150px', height: '40px' }} icon={<CgScrollV />} /></a> }
+        </Stack>
+        <Stack direction="row" flexWrap='wrap' alignItems="center" gap={1} mb={1}>
+          {isCompetition && <>
+            <Chip label={`₹${prize} Pool`} icon={<AiFillTrophy />} />
+            <Chip label={`${poc} ${poc_contact}`} icon={<FiUser />}/>
+          </>
+          }
+          <Chip label={date} icon={<FiCalendar />} />
+        </Stack>
+        <Chip label={venue} icon={<FiMapPin />} />
+      </Container>
+    </GradientBox>
+  );
+};
+
 
 const About = () => {
-  const eventsRef = useRef(null);
-  const { data, isLoading, isError, isSuccess } = useTimeline()
-
-
-  useEffect(()=> {
-    if(isSuccess){
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.trigger',
-          start: 'top top',
-          end: '+=1000', //this was 2000 intially, changed to get it right for 1 card
-          pin: '.trigger',
-          pinSpacing: true,
-          scrub: 1,
-          immediateRender: false,
-        },
-      });
-
-      // Calculate the height difference (scroll distance) for the left section
-      const scrollDistance = eventsRef.current.scrollWidth;
-
-// Create a new timeline to scroll the left section
-      timeline.to(eventsRef.current, {
-        x: -scrollDistance,  // Use negative to scroll to the right
-      });
-    }
-  }, [data])
+  const { data, isLoading } = useEventData();
+  const rootRef = useRef();
+  
 
   return (
-<Patternbg>
-    <Container id="about-root" maxWidth="lg">
-      <Spacer size='xl' />
+    <Box ref={rootRef} sx={{ backgroundColor: 'black' }}>
+      <Patternbg>
 
-      <GradientText className="title" primary="Timeline" secondary="Live Events." />
-      <Spacer size="sm" />
-      <Box className="trigger">
-        <Grid container spacing={1.5}>
-          <Grid item xs={12} md={12} overflow='hidden'>
-            <Box ref={eventsRef} >
-              <Box display='flex' gap={1} >
-                {
-                  isSuccess &&                    data.map((_) => (<TimelineEvent event={_} />))
+      <Appbar />
+      <Container maxWidth="lg" color="white" sx={{ pt: 15 }}>
+        <HeadCarousel />
+        
 
-                }
+      <Spacer size="lg" />
+      </Container>
+      </Patternbg>
 
-              </Box>{' '}
-            </Box>{' '}
-          </Grid>{' '}
-          <Grid item xs={12} md={12} height='100%'>
-              <iframe
-                style={{
-                  borderRadius: '18px',
-                  boxShadow: '0px 0px 15px rgba(0,0,0,0.2)', // optional shadow for a bit of depth
-                  border: '1px solid #ccc', // a light border
-                }}
-                src="https://s6.imgcdn.dev/fF4zT.png"
-                allow="geolocation; clipboard-write"
-                width="100%"
-                height="450px"
-                allowFullScreen
-              >
-                {' '}
-              </iframe>{' '}
-          </Grid>{' '}
-        </Grid>{' '}
-      </Box>{' '}
-    </Container>
-  <Spacer size="xl" />
-
-</Patternbg>
-  );
-};
-
-const TimelineEvent = ({ event }) => {
-  const img = event.image_url
-  const name = event.name
-  const location = event.location
-  const time = event.time
-  return (
-    <Box my={1}>
-        <GradientBox width='300px' height='300px' img={img}>
-          <BoxContent
-            title={name}
-            description={time}
-            description2={location}
-          />
-        </GradientBox>{' '}
     </Box>
   );
 };
-const DummyPairOfEvents = () => {
-  return (
-    <Box my={1}>
-      <Stack direction="column">
-        <GradientBox img="">
-          <BoxContent
-            width="65%"
-            title="Coming Soon"
-            description="SCHEDULE FOR ALL EVENTS WILL BE UPDATED SOON"
-            key={false}
-          />{' '}
-        </GradientBox>{' '}
-      </Stack>{' '}
-    </Box>
-  );
-};
+
+
+
 
 export default About;

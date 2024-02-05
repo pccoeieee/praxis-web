@@ -6,7 +6,7 @@ import Spacer from '../../components/Spacer';
 import { Description, Heading } from '../../components/common/typography';
 import EmblaCarousel from '../../components/common/carousel';
 import GradientBox from '../../components/common/gradientbox';
-import { FiArrowRight, FiCalendar, FiClock, FiMapPin, FiUser } from 'react-icons/fi';
+import { FiArrowRight, FiArrowLeft, FiCalendar, FiClock, FiMapPin, FiUser } from 'react-icons/fi';
 import GradientText from '../../components/common/gradienttext';
 import { useEventData } from '../../hooks/useEvents';
 import CustomizedDialogs from './CustomizedDialogs';
@@ -29,7 +29,7 @@ const HeadCarousel = () => {
   );
 };
 
-const HeadEvent = ({ subtitle, firstCta, secondCta, description, event }) => {
+const HeadEvent = ({ subtitle, firstCta, secondCta, description, event}) => {
   const background = event.image;
   const title = event.title;
   const needRegister = event.needRegister;
@@ -41,6 +41,17 @@ const HeadEvent = ({ subtitle, firstCta, secondCta, description, event }) => {
   const isCompetition = event.isCompetition
   const prize = event.Prize
   const registrationLink = event.registrationLink
+
+  const [CurrentCardIndex, setCurrentCardIndex] = useState(0);
+  const { data, isLoading } = useEventData();
+
+  const handleNextCard = () => {
+    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % data.length);
+  };
+
+  const handlePrevCard = () => {
+    setCurrentCardIndex((prevIndex) => (prevIndex - 1 + data.length) % data.length);
+  };
 
   return (
     <GradientBox size='small' height="100%" color="white">
@@ -59,7 +70,16 @@ const HeadEvent = ({ subtitle, firstCta, secondCta, description, event }) => {
       <Container maxWidth="lg">
         {/* <Typography fontFamily="Lato" variant="body1" gutterBottom>
           {title}
-        </Typography> */}
+      </Typography> */}
+      <Stack direction="row" alignItems="center" justifyContent="space-between" mt={2}>
+          <IconButton onClick={handlePrevCard}>
+            <FiArrowLeft />
+          </IconButton>
+          <IconButton onClick={handleNextCard}>
+            <FiArrowRight />
+          </IconButton>
+        </Stack>
+
         <Box sx={{ width: { xs: '100%', md: '45%' } }}>
           <Typography
             variant="h1"
@@ -82,8 +102,8 @@ const HeadEvent = ({ subtitle, firstCta, secondCta, description, event }) => {
           {/*</Typography>}*/}
         </Box>
         <Stack direction="row" flexWrap='wrap' alignItems="center" gap={1} mb={1}>
-          {needRegister && <a target='_blank' href={registrationLink}><Chip color='primary' label="Registration"  icon={<GiTicket />} /></a>}
-          {needRegister && <a target='_blank' href={rule}><Chip color='secondary' label="Rule book"  icon={<CgScrollV />} /></a> }
+          {needRegister && <a target='_blank' href={registrationLink}><Chip color='primary' label="Registration" sx={{ width: '150px', height: '40px' }} icon={<GiTicket />} /></a>}
+          {needRegister && <a target='_blank' href={rule}><Chip color='secondary' label="Rule Book" sx={{ width: '150px', height: '40px' }} icon={<CgScrollV />} /></a> }
         </Stack>
         <Stack direction="row" flexWrap='wrap' alignItems="center" gap={1} mb={1}>
           {isCompetition && <>
@@ -99,75 +119,11 @@ const HeadEvent = ({ subtitle, firstCta, secondCta, description, event }) => {
   );
 };
 
-const Event = ({ name, description, img }) => {
-  const { data, isLoading } = useEventData();
-  // console.log(data);
-
-
-  return (
-    <GradientBox
-      height="200px"
-      size="small"
-      background="linear-gradient(135deg, #f7f7f7, #cfcfcf)"
-      img={img}
-      action={true}
-    >
-      <Box>
-        <Typography
-          variant="h2"
-          fontWeight="bold"
-          fontFamily="typography.fontFamily"
-          color="common.black"
-          letterSpacing="-1px"
-          fontSize="32px"
-          lineHeight="1.2"
-          gutterBottom
-        >
-          <span style={{ backgroundColor: 'rgba(233,255,50, 0.7)' }}>{name}</span>
-        </Typography>
-        {/*<Description color="black">{description}</Description>*/}
-
-        <Box position="absolute" right={'25px'} bottom="15px">
-          <IconButton>
-            <FiArrowRight />
-          </IconButton>
-        </Box>
-      </Box>
-    </GradientBox>
-  );
-};
 
 const Events = () => {
   const { data, isLoading } = useEventData();
   const rootRef = useRef();
-  // const [data, setData] = useState([]);
-  // const binId = '650b2bb0205af66dd4a23cb4';
-  // const apiKey = '$2a$10$ALWgRdFMPxMOF8WhLWbVmuC1Q.mfj6P/O1CvmwCXLT9LRC4HM6Woq';
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`, {
-  //         headers: {
-  //           'X-Master-Key': apiKey,
-  //         },
-  //       });
-
-
-  //       if (response.ok) {
-  //         const jsonData = await response.json();
-  //         setData(jsonData.record.events);
-  //         console.log(data)
-  //         // console.log(data.record.events)
-  //       } else {
-  //         console.error(`Failed to fetch data. Status code: ${response.status}`);
-  //       }
-  //     } catch (error) {
-  //       console.error('Error:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // },[]);
+  
 
   return (
     <Box ref={rootRef} sx={{ backgroundColor: 'black' }}>
@@ -176,114 +132,9 @@ const Events = () => {
       <Appbar />
       <Container maxWidth="lg" color="white" sx={{ pt: 15 }}>
         <HeadCarousel />
-        <Spacer size="md" />
-        <GradientText primary="Major" secondary="Events" />
-        <Spacer size="xs" />
-        {
-          isLoading ?  <Skeleton width='100%' height='200px'/>  :     <EmblaCarousel gap="20px">
-            {data.map((_, index) => (
-              <Event name={`${_.title}`} description={`${_.description}`} img={`${_.image}`} />
-            ))}
-          </EmblaCarousel>
-
-        }
-        <Spacer size="lg" />
 
 
 
-        {/*<Heading>Talks</Heading>*/}
-        {/*<Spacer size="xs" />*/}
-        {/*<EmblaCarousel gap="20px">*/}
-        {/*{talks.map((_, index) => (*/}
-
-        {/*    <Event name={`${_.title}`} description={`${_.description}`}  />*/}
-        {/*    ))}*/}
-        {/*</EmblaCarousel>*/}
-
-        {/*<Spacer size="lg" />*/}
-        {/*<Heading>CSR</Heading>*/}
-        {/*<Spacer size="xs" />*/}
-        {/*<EmblaCarousel gap="20px">*/}
-        {/*{csr.map((_, index) => (*/}
-
-        {/*    <Event name={`${_.title}`} description={`${_.description}`}  />*/}
-        {/*    ))}*/}
-        {/*</EmblaCarousel>*/}
-        {/*<Spacer size="lg" />*/}
-
-        {/*<Heading>Workshops</Heading>*/}
-        {/*<Spacer size="xs" />*/}
-        {/*<EmblaCarousel gap="20px">*/}
-        {/*{workshops.map((_, index) => (*/}
-
-        {/*    <Event name={`${_.title}`} description={`${_.description}`}  />*/}
-        {/*    ))}*/}
-        {/*</EmblaCarousel>*/}
-        {/*<Spacer size="lg" />*/}
-
-        {/*<Heading>Tech Conflux</Heading>*/}
-        {/*<Spacer size="xs" />*/}
-        {/*<EmblaCarousel gap="20px">*/}
-        {/*{conflux.map((_, index) => (*/}
-
-        {/*    <Event name={`${_.title}`} description={`${_.description}`}  />*/}
-        {/*    ))}*/}
-        {/*  /!* <Event name="Clubs" description="Bruh" /> *!/*/}
-        {/*</EmblaCarousel>*/}
-        {/*<Spacer size="lg" />*/}
-
-        {/*<Heading>Department Events</Heading>*/}
-        {/*<Spacer size="xs" />*/}
-        {/*<EmblaCarousel gap="20px">*/}
-        {/*  <Event name="Open House of Labs" description="Bruh" />*/}
-        {/*  <Event name="Research Paper Presentation" description="Bruh" />*/}
-        {/*  <Event name="Quizes" description="Bruh" />*/}
-        {/*</EmblaCarousel>*/}
-        {/*<Spacer size="lg" />*/}
-
-        {/*<Heading>Gala</Heading>*/}
-        {/*<Spacer size="xs" />*/}
-        {/*<EmblaCarousel gap="20px">*/}
-        {/*  <Event name="Bizwaves" description="Bruh" />*/}
-        {/*  /!* <Event name="M.U.N" description="Bruh" /> *!/*/}
-        {/*  <Event name="Tech Quizes" description="Bruh" />*/}
-        {/*</EmblaCarousel>*/}
-        {/*<Spacer size="lg" />*/}
-
-        {/*<Heading>Gaming Events</Heading>*/}
-        {/*<Spacer size="xs" />*/}
-        {/*<EmblaCarousel gap="20px">*/}
-        {/*  <Event name="B.G.M.I" description="Bruh" />*/}
-        {/*  <Event name="FIFA" description="Bruh" />*/}
-        {/*  <Event name="Valorant" description="Bruh" />*/}
-        {/*</EmblaCarousel>*/}
-        {/*<Spacer size="lg" />*/}
-
-        {/*<Heading>Proshows</Heading>*/}
-        {/*<Spacer size="xs" />*/}
-        {/*<EmblaCarousel gap="20px">*/}
-        {/*  <Event name="Comedy Night" description="Bruh" />*/}
-        {/*  /!* <Event name="Star Eve" description="Bruh" /> *!/*/}
-        {/*  /!* <Event name="Bike Stunt-Show" description="Bruh" /> *!/*/}
-        {/*  <Event name="DJ / Band" description="Bruh" />*/}
-        {/*</EmblaCarousel>*/}
-        {/*<Spacer size="lg" />*/}
-
-        {/* {carousal.map((hello, index) => (
-          <>
-                <Heading>{hello.category}</Heading>
-                <Spacer size="xs" />
-                <EmblaCarousel gap="20px">
-                {carousal.map((hull, index) => (
-                <>
-                    <Event name={hull.event} description="Bruh" />
-                </>
-                ))}{" "}
-                </EmblaCarousel>
-
-                <Spacer size="lg" />
-              </>
-            ))}{" "} */}
       </Container>
       <Footer />
       </Patternbg>

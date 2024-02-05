@@ -18,15 +18,15 @@ const Patternbg = ({ children }) => {
         <div style={{ position: 'absolute', left: '-75px', top: '20%', zIndex: 1 }}>
         <img width='180px' src={satelite} alt="Random content 1" className="animateImage" data-speed=".4"/>
       </div>
-      <div style={{ position: 'absolute', left: '-20px', bottom: '40%', zIndex: 1 }}>
+      <div style={{ position: 'absolute', left: '-60px', bottom: '10%', zIndex: 1 }}>
         <img  width='144px' src={planet2} alt="Random content 2" className="animateImage" data-speed=".2"/>
       </div>
 
       {/* Right-side divs */}
-      <div style={{ position: 'absolute', right: '-20px', top: '40%', zIndex: 1, transform: 'rotateZ(180deg)' }}>
+      <div style={{ position: 'absolute', right: '-60px', top: '30%', zIndex: 1, transform: 'rotateZ(180deg)' }}>
         <img width='140px' src={robot} alt="Random content 3" className="animateImage" data-speed=".3"/>
       </div>
-      <div style={{ position: 'absolute', right: '-20px', bottom: '20%', zIndex: 1 }}>
+      <div style={{ position: 'absolute', right: '-50px', bottom: '20%', zIndex: 1 }}>
         <img  width='144px' src={planet} alt="Random content 4" className="animateImage" data-speed=".2"/>
       </div>
 

@@ -142,14 +142,7 @@ const Hero = () => {
                 variant="body1"
                 color="textSecondary"
               >
-                In the remarkable year of 2005, a group of visionary individuals
-                from the prestigious NITK created an extraordinary platform that
-                ignited the imaginations of countless creative minds. This
-                unparalleled gathering was a grand fusion of brilliance and
-                innovation, affectionately named eNGINEER, the annual technical
-                symposium of NITK. It quickly became a mesmerizing confluence of
-                intellect and ingenuity, capturing the hearts of engineering
-                enthusiasts far and wide.{" "}
+                {" "}
               </Typography>
               <Spacer size={"xs"} />
               <Typography
@@ -158,13 +151,7 @@ const Hero = () => {
                 variant="body1"
                 color="textSecondary"
               >
-                At the helm of this magnificent spectacle was the iconic Penrose
-                triangle, a symbol that embodied the very essence of defying the
-                impossible. Its flawless form beckoned individuals to push the
-                boundaries of their potential and explore uncharted territories
-                of knowledge. With the resounding motto of "ENSIGHT, ENNOVATION,
-                ENVENTION," Engineer stood as a testament to the indomitable
-                spirit of discovery and invention.{" "}
+                {" "}
               </Typography>
               <Spacer size={"xs"} />
               <Typography
@@ -173,10 +160,7 @@ const Hero = () => {
                 variant="body1"
                 color="textSecondary"
               >
-                The 18th edition of this grand symposium outshone its
-                predecessors, ascending to become a nationwide sensation and
-                proudly securing the coveted second position among India's most
-                esteemed technical fests.{" "}
+                {" "}
               </Typography>
               <Spacer size={"xs"} />
             </Box>

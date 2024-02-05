@@ -150,6 +150,7 @@ function App() {
           <Route exact index path="/" element={<Home />} />{" "}
           <Route exact path="/team" element={<Team />} />{" "}
           <Route exact path="/game" element={<Game />} />{" "}
+          <Route exact path="/ambassador" element={<Ambassador />} />{" "}
 
         </Routes>{" "}
       </Box>{" "}

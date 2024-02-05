@@ -26,10 +26,6 @@ const linksData = [
   { to: '/', text: 'Home' },
   { to: '/ambassador', text: 'Ambassadors' },
   { to: '/events', text: 'Events' },
-  { to: '/brochure', text: 'Brochure' },
-  { to: '/accommodation', text: 'Accommodation' },
-  { to: '/about', text: 'About Us' },
-  { to: '/contact', text: 'Contact' },
   { to: '/team', text: 'Team' },
 ];
 
