@@ -1,0 +1,88 @@
+.Codedamn {
+    text-align: center;
+  }
+  
+  
+  @keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.4);
+    }
+    20%, 24%, 55% {
+      text-shadow: none;
+    }
+  }
+  
+  h2::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    border-radius: 10px;
+    animation: pulsate 3s infinite alternate;
+    animation-timing-function: ease-in-out;
+  }
+  
+  @keyframes pulsate {
+    0%, 100% {
+      border-color: rgba(0, 255, 255, 0.6);
+    }
+    50% {
+      border-color: rgba(255, 0, 255, 0.6);
+    }
+  }
+  
+  .timer-container {
+    display: flex;
+    justify-content: center;
+    margin: 8px;
+  }
+  
+  .timer-item {
+    margin: 0 8px; /* Adjust margin for better spacing on mobile */
+    text-align: center;
+  }
+
+  .timer-heading {
+    text-align: center;
+    font-size: 1.7rem;
+    margin-bottom: -15px;
+    color: #fff;
+  }
+  
+  .timer-item h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #0ff;
+  }
+
+  .timer-item h2 {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    position: relative;
+    color: #0ff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.4);
+    animation: flicker 2s infinite;
+  }
+  
+  .timer-item p {
+    font-size: 1.5rem; /* Decrease font size for mobile */
+    margin: 0;
+    color: #F681E6;
+  }
+  
+  /* Media Query for screens smaller than 600px (typical mobile screens) */
+  @media screen and (max-width: 600px) {
+    h2 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .timer-heading {
+        font-size: 1.25rem;
+      }
+
+  }
+  

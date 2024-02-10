@@ -200,7 +200,7 @@ const TaglineCard = ({ title, description, icon, imageUrl, index }) => {
     <Box className={`card-${index}`}
     >
       <GradientBox backgroundImage={imageUrl} height='300px'>
-        <Box width="70%">
+        <Box width="80%">
           <Heading variant="h2">
             {title.split(" ")[0]} {title.split(" ").slice(1).join(" ")}
           </Heading>

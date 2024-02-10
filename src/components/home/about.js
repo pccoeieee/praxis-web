@@ -15,6 +15,11 @@ import easyMeshGradient from "easy-mesh-gradient";
 import Patternbg from '../../components/common/patternbg';
 import { CgScrollV } from 'react-icons/cg';
 import {  GiTicket } from 'react-icons/gi';
+import RegistrationsClosing from './RegistrationsClosing';
+import Timer from './timer';
+
+
+
 
 
 const HeadCarousel = () => {
@@ -31,7 +36,6 @@ const HeadCarousel = () => {
 };
 
 const HeadEvent = ({ subtitle, firstCta, secondCta, description, event}) => {
-  const background = event.image;
   const title = event.title;
   const needRegister = event.needRegister;
   const rule = event.rule;
@@ -46,42 +50,14 @@ const HeadEvent = ({ subtitle, firstCta, secondCta, description, event}) => {
   const [CurrentCardIndex, setCurrentCardIndex] = useState(0);
   const { data, isLoading } = useEventData();
 
-  const handleNextCard = () => {
-    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % data.length);
-  };
-
-  const handlePrevCard = () => {
-    setCurrentCardIndex((prevIndex) => (prevIndex - 1 + data.length) % data.length);
-  };
-
   return (
     <GradientBox size='small' height="100%" color="white">
-      <img
-        style={{
-          display: 'block',
-          position: 'absolute',
-          height: '100%',
-          right: 0,
-          bottom: 0,
-          zIndex: -1,
-          opacity: 0.4,
-        }}
-        src={background}
-      />
       <Container maxWidth="lg">
         {/* <Typography fontFamily="Lato" variant="body1" gutterBottom>
           {title}
       </Typography> */}
-      <Stack direction="row" alignItems="center" justifyContent="space-between" mt={2}>
-          <IconButton onClick={handlePrevCard}>
-            <FiArrowLeft />
-          </IconButton>
-          <IconButton onClick={handleNextCard}>
-            <FiArrowRight />
-          </IconButton>
-        </Stack>
 
-        <Box sx={{ width: { xs: '100%', md: '45%' } }}>
+        <Box sx={{ width: { xs: '100%', md: '85%' } }}>
           <Typography
             variant="h1"
             pt={8}
@@ -124,12 +100,16 @@ const HeadEvent = ({ subtitle, firstCta, secondCta, description, event}) => {
 const About = () => {
   const { data, isLoading } = useEventData();
   const rootRef = useRef();
-  
+
+  {/*const closingDate = '2024-02-14T12:00:00'; */}
+  const deadline = new Date(2024, 1, 14, 12, 0, 0);
 
   return (
     <Box ref={rootRef} sx={{ backgroundColor: 'black' }}>
       <Patternbg>
-
+      <Spacer size="lg" />
+      {/*<RegistrationsClosing closingDate={closingDate} /> */}
+      <Timer deadline={deadline}/>
       <Appbar />
       <Container maxWidth="lg" color="white" sx={{ pt: 15 }}>
         <HeadCarousel />
@@ -142,7 +122,6 @@ const About = () => {
     </Box>
   );
 };
-
 
 
 
