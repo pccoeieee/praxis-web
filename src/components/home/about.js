@@ -102,7 +102,7 @@ const About = () => {
   const rootRef = useRef();
 
   {/*const closingDate = '2024-02-14T12:00:00'; */}
-  const deadline = new Date(2024, 1, 16, 12, 0, 0);
+  const deadline = new Date(2024, 1, 17, 17, 0, 0);
 
   return (
     <Box ref={rootRef} sx={{ backgroundColor: 'black' }}>

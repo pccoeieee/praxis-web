@@ -43,7 +43,7 @@ const Timer = ({ deadline }) => {
             <div className="timer-container">
                 <div className="timer-item">
                     <h2>{timer.days}</h2>
-                    <p><b>DAYS</b></p>
+                    <p><b>DAY</b></p>
                 </div>
                 <div className="timer-item">
                     <h2>:</h2>
