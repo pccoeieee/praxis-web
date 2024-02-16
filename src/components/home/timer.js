@@ -41,13 +41,13 @@ const Timer = ({ deadline }) => {
                     <h1>REGISTRATIONS CLOSING IN</h1>
                 </div>
             <div className="timer-container">
-                <div className="timer-item">
+                {/*<div className="timer-item">
                     <h2>{timer.days}</h2>
                     <p><b>DAY</b></p>
                 </div>
                 <div className="timer-item">
                     <h2>:</h2>
-                </div>
+                </div> */}
                 <div className="timer-item">
                     <h2>{timer.hours}</h2>
                     <p><b>HOURS</b></p>
@@ -59,13 +59,13 @@ const Timer = ({ deadline }) => {
                     <h2>{timer.minutes}</h2>
                     <p><b>MINUTES</b></p>
                 </div>
-                {/*<div className="timer-item">
+                <div className="timer-item">
                     <h2>:</h2>
                 </div>
                 <div className="timer-item">
                     <h2>{timer.seconds}</h2>
                     <p><b>SECONDS</b></p>
-                </div> */}
+                </div>
             </div>
         </div>
     );
