@@ -146,7 +146,6 @@ function App() {
         <Routes>
           <Route exact path="/about" element={<About />} />{" "}
           <Route exact path="/gallery" element={<Gallery />} />{" "}
-          <Route exact path="/events" element={<Events />} />{" "}
           <Route exact index path="/" element={<Home />} />{" "}
           <Route exact path="/team" element={<Team />} />{" "}
           <Route exact path="/game" element={<Game />} />{" "}

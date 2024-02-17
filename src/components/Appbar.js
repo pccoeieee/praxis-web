@@ -32,7 +32,6 @@ import Patternbg from './common/patternbg';
 let navLinks = [
   { title: "Home", path: "/" },
   { title: "Referrals", path: "/ambassador" },
-  { title: "Events", path: "/events" },
   { title: "Team", path: '/team'},
   { title: "Game", path: '/game'}
 
@@ -41,7 +40,6 @@ let navLinks = [
 let mainLinks = [
   { title: "Home", path: "/" },
   { title: "Referrals", path: "/ambassador" },
-  { title: "Events", path: "/events" },
   { title: "Team", path: '/team'},
   { title: "Game", path: '/game'}
 ];

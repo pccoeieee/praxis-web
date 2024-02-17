@@ -79,7 +79,7 @@ const HeadEvent = ({ subtitle, firstCta, secondCta, description, event}) => {
           {/*</Typography>}*/}
         </Box>
         <Stack direction="row" flexWrap='wrap' alignItems="center" gap={1} mb={1}>
-          {needRegister && <a target='_blank' href={registrationLink}><Chip color='primary' label="Registration" sx={{ width: '150px', height: '40px' }} icon={<GiTicket />} /></a>}
+          {needRegister && <a target='_blank'><Chip color='primary' label="Registration Closed" sx={{ width: '150px', height: '40px' }} icon={<GiTicket />} /></a>}
           {needRegister && <a target='_blank' href={rule}><Chip color='secondary' label="Rule Book" sx={{ width: '150px', height: '40px' }} icon={<CgScrollV />} /></a> }
         </Stack>
         <Stack direction="row" flexWrap='wrap' alignItems="center" gap={1} mb={1}>
@@ -109,7 +109,7 @@ const About = () => {
       <Patternbg>
       <Spacer size="lg" />
       {/*<RegistrationsClosing closingDate={closingDate} /> */}
-      <Timer deadline={deadline}/>
+      {/*<Timer deadline={deadline}/> */}
       <Appbar />
       <Container maxWidth="lg" color="white" sx={{ pt: 15 }}>
         <HeadCarousel />
